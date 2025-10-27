@@ -1,6 +1,6 @@
 FROM python:3.7-alpine
 
-LABEL MAINTAINER="Daniel Pryor <daniel@pryorda.net>"
+LABEL MAINTAINER="Max Etiqua <massimiliano.ribuoli@etiqua.it>"
 LABEL NAME=vmware_exporter
 
 WORKDIR /opt/vmware_exporter/

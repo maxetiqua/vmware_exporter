@@ -8,8 +8,8 @@ setup(
     description='VMWare VCenter Exporter for Prometheus',
     long_description=open('README.md').read(),
     long_description_content_type="text/markdown",
-    url='https://github.com/pryorda/vmware_exporter',
-    download_url=("https://github.com/pryorda/vmware_exporter/tarball/%s" %
+    url='https://github.com/maxetiqua/vmware_exporter',
+    download_url=("https://github.com/maxetiqua/vmware_exporter/tarball/%s" %
                   vmware_exporter.__version__),
     keywords=['VMWare', 'VCenter', 'Prometheus'],
     license=vmware_exporter.__license__,
