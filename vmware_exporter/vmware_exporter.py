@@ -738,6 +738,7 @@ class VmwareCollector():
             'runtime.host',
             'parent',
             'summary.config.vmPathName',
+            'guest.ipAddress',
         ]
 
         if self.collect_only['vms'] is True:

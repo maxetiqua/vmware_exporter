@@ -41,7 +41,7 @@ repos:
     stages: [commit]
     args:
       - --ignore=F705,E123,E402
-- repo: https://github.com/pryorda/dockerfilelint-precommit-hooks
+- repo: https://github.com/maxetiqua/dockerfilelint-precommit-hooks
   rev: v0.1.0
   hooks:
   - id: dockerfilelint
