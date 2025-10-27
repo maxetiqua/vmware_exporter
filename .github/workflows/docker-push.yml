@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    name: Build and push image
+    name: Build and push new image
     runs-on: ubuntu-20.04
 
     steps:
