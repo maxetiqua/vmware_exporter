@@ -1,6 +1,7 @@
 '''
 Helpers for writing efficient twisted code, optimized for coroutine scheduling efficiency
 '''
+# autopep8'd
 
 from twisted.internet import defer
 from twisted.python import failure
@@ -56,7 +57,7 @@ class BranchingDeferred(defer.Deferred):
             self.callbacks.pop(0).errback(err)
 
     def addCallbacks(self, *args, **kwargs):
-        if not self.result:
+        if self.result is None:
             d = defer.Deferred()
             d.addCallbacks(*args, **kwargs)
             self.callbacks.append(d)
