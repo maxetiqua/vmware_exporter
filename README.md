@@ -1,6 +1,3 @@
-# Needs new home. Since Broadcom is no longer catering to its opensource/free base, I have decided to move on from maintaining this project. Please create a discussion if you would like to take over managing this project.
-
-
 # vmware_exporter
 
 VMware vCenter Exporter for Prometheus.
@@ -12,12 +9,12 @@ Get VMware vCenter information:
 - Snapshot Unix timestamp creation date
 
 ## Badges
-![Docker Stars](https://img.shields.io/docker/stars/maxetiqua/vmware_exporter.svg)
-![Docker Pulls](https://img.shields.io/docker/pulls/maxetiqua/vmware_exporter.svg)
-![Docker Automated](https://img.shields.io/docker/automated/maxetiqua/vmware_exporter.svg)
+![Docker Stars](https://img.shields.io/docker/stars/pryorda/vmware_exporter.svg)
+![Docker Pulls](https://img.shields.io/docker/pulls/pryorda/vmware_exporter.svg)
+![Docker Automated](https://img.shields.io/docker/automated/pryorda/vmware_exporter.svg)
 
-[![Travis Build Status](https://travis-ci.org/maxetiqua/vmware_exporter.svg?branch=master)](https://travis-ci.org/maxetiqua/vmware_exporter)
-![Docker Build](https://img.shields.io/docker/build/maxetiqua/vmware_exporter.svg)
+[![Travis Build Status](https://travis-ci.org/pryorda/vmware_exporter.svg?branch=master)](https://travis-ci.org/pryorda/vmware_exporter)
+![Docker Build](https://img.shields.io/docker/build/pryorda/vmware_exporter.svg)
 [![Join the chat at https://gitter.im/vmware_exporter/community](https://badges.gitter.im/vmware_exporter/community.svg)](https://gitter.im/vmware_exporter/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## Usage
@@ -32,21 +29,8 @@ Get VMware vCenter information:
 Alternatively, if you don't wish to install the package, run it using `$ vmware_exporter/vmware_exporter.py` or use the following docker command:
 
 ```
-docker run -it --rm  -p 9272:9272 -e VSPHERE_USER=${VSPHERE_USERNAME} -e VSPHERE_PASSWORD=${VSPHERE_PASSWORD} -e VSPHERE_HOST=${VSPHERE_HOST} -e VSPHERE_IGNORE_SSL=True -e VSPHERE_SPECS_SIZE=2000 --name vmware_exporter maxetiqua/vmware_exporter
+docker run -it --rm  -p 9272:9272 -e VSPHERE_USER=${VSPHERE_USERNAME} -e VSPHERE_PASSWORD=${VSPHERE_PASSWORD} -e VSPHERE_HOST=${VSPHERE_HOST} -e VSPHERE_IGNORE_SSL=True -e VSPHERE_SPECS_SIZE=2000 --name vmware_exporter pryorda/vmware_exporter
 ```
-
-When using containers combined with `--env-file` flag, please use capital letters to set bolleans, for example:
-
-```
-$ podman run -it --rm -p 9272:9272 --name vmware_exporter --env-file config.env maxetiqua/vmware_exporter
-$ cat config.env
-VSPHERE_USER=administrator@vsphere.my.domain.com
-VSPHERE_PASSWORD=Secure-Pass
-VSPHERE_HOST=192.168.0.1
-VSPHERE_IGNORE_SSL=TRUE
-VSPHERE_SPECS_SIZE=2000
-```
-
 
 ### Configuration and limiting data collection
 
@@ -71,9 +55,6 @@ default:
     vsphere_password: "password"
     ignore_ssl: False
     specs_size: 5000
-    fetch_custom_attributes: True
-    fetch_tags: True
-    fetch_alarms: True
     collect_only:
         vms: True
         vmguests: True
@@ -87,9 +68,6 @@ esx:
     vsphere_password: 'password'
     ignore_ssl: True
     specs_size: 5000
-    fetch_custom_attributes: True
-    fetch_tags: True
-    fetch_alarms: True
     collect_only:
         vms: False
         vmguests: True
@@ -103,9 +81,6 @@ limited:
     vsphere_password: 'password'
     ignore_ssl: True
     specs_size: 5000
-    fetch_custom_attributes: True
-    fetch_tags: True
-    fetch_alarms: False
     collect_only:
         vms: False
         vmguests: False
@@ -118,15 +93,12 @@ Switching sections can be done by adding ?section=limited to the URL.
 
 #### Environment Variables
 | Variable                      	| Precedence             | Defaults | Description                                      				|
-| --------------------------------------| ---------------------- | -------- | --------------------------------------------------------------------------|
+| ---------------------------- | ---------------------- | -------- | --------------------------------------- |
 | `VSPHERE_HOST`               		| config, env, get_param | n/a      | vsphere server to connect to   						|
 | `VSPHERE_USER`               		| config, env            | n/a      | User for connecting to vsphere 						|
 | `VSPHERE_PASSWORD`           		| config, env            | n/a      | Password for connecting to vsphere 					|
 | `VSPHERE_SPECS_SIZE`         		| config, env            | 5000     | Size of specs list for query stats function 				|
 | `VSPHERE_IGNORE_SSL`         		| config, env            | False    | Ignore the ssl cert on the connection to vsphere host 			|
-| `VSPHERE_FETCH_CUSTOM_ATTRIBUTES`    	| config, env            | False    | Set to true to collect objects custom attributes as metric labels 	|
-| `VSPHERE_FETCH_TAGS`    		| config, env            | False    | Set to true to collect objects tags as metric labels 			|
-| `VSPHERE_FETCH_ALARMS`       		| config, env            | False    | Fetch objects triggered alarms, and in case of hosts hdw alarms as well 	|
 | `VSPHERE_COLLECT_HOSTS`      		| config, env            | True     | Set to false to disable collection of host metrics 			|
 | `VSPHERE_COLLECT_DATASTORES` 		| config, env            | True     | Set to false to disable collection of datastore metrics 			|
 | `VSPHERE_COLLECT_VMS`        		| config, env            | True     | Set to false to disable collection of virtual machine metrics 		|
@@ -136,15 +108,12 @@ Switching sections can be done by adding ?section=limited to the URL.
 You can create new sections as well, with very similiar variables. For example, to create a `limited` section you can set:
 
 | Variable                      		| Precedence             | Defaults | Description                                      				|
-| ----------------------------------------------| ---------------------- | -------- | --------------------------------------------------------------------------|
+| ---------------------------- | ---------------------- | -------- | --------------------------------------- |
 | `VSPHERE_LIMITED_HOST`               		| config, env, get_param | n/a      | vsphere server to connect to   						|
 | `VSPHERE_LIMITED_USER`               		| config, env            | n/a      | User for connecting to vsphere 						|
 | `VSPHERE_LIMITED_PASSWORD`           		| config, env            | n/a      | Password for connecting to vsphere 					|
 | `VSPHERE_LIMITED_SPECS_SIZE`         		| config, env            | 5000     | Size of specs list for query stats function 				|
 | `VSPHERE_LIMITED_IGNORE_SSL`         		| config, env            | False    | Ignore the ssl cert on the connection to vsphere host 			|
-| `VSPHERE_LIMITED_FETCH_CUSTOM_ATTRIBUTES`   	| config, env            | False    | Set to true to collect objects custom attributes as metric labels 	|
-| `VSPHERE_LIMITED_FETCH_TAGS`    		| config, env            | False    | Set to true to collect objects tags as metric labels 			|
-| `VSPHERE_LIMITED_FETCH_ALARMS`       		| config, env            | False    | Fetch objects triggered alarms, and in case of hosts hdw alarms as well	|
 | `VSPHERE_LIMITED_COLLECT_HOSTS`      		| config, env            | True     | Set to false to disable collection of host metrics 			|
 | `VSPHERE_LIMITED_COLLECT_DATASTORES` 		| config, env            | True     | Set to false to disable collection of datastore metrics 			|
 | `VSPHERE_LIMITED_COLLECT_VMS`        		| config, env            | True     | Set to false to disable collection of virtual machine metrics 		|
@@ -269,10 +238,8 @@ Forked from https://github.com/rverchere/vmware_exporter. I removed the fork so 
 
 ## Maintainer
 
-Max Etiqua [maxetiqua](https://github.com/maxetiqua)
+Daniel Pryor [pryorda](https://github.com/pryorda)
 
 ## License
 
 See LICENSE file
-
-[![Known Vulnerabilities](https://snyk.io/test/github/rmontenegroo/vmware_exporter/badge.svg?targetFile=requirements.txt)](https://snyk.io/test/github/rmontenegroo/vmware_exporter?targetFile=requirements.txt)

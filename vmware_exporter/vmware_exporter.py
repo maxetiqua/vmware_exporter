@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # -*- python -*-
 # -*- coding: utf-8 -*-
-# autopep8'd
 """
 Handles collection of metrics for vmware.
 """
+
 from __future__ import print_function
 
 # Generic imports
